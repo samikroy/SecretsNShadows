@@ -20,15 +20,11 @@ Shadow AI tools like ChatGPT, Gemini, and Copilot are rapidly adopted in the wor
 
 ### 📁 `/scripts`  
 PowerShell & KQL scripts to identify AI usage, risky extensions, and shadow app activity:
-- `ai-endpoint-discovery.ps1`: Scan endpoints for AI URLs and extensions
-- `kql-sentinel-ai-traffic.kql`: Detect AI usage patterns in Microsoft Sentinel logs
-- `defender-extension-report.ps1`: Report extension usage across browsers via Defender
-
-### 📁 `/policies`  
-Prebuilt policies to enforce AI-aware security:
-- `intune-browser-block-policy.json`: Block AI browser extensions
-- `purview-dlp-rule.json`: DLP rule to detect prompt/data leakage
-- `sentinel-analytics-rules/`: KQL-based detection rules for AI activity
+- `audit-extensions.ps1`: Scan endpoints for AI URLs and extensions
+- `sentinel-shadowai-alerts.kql`: Detect AI usage patterns in Microsoft Sentinel logs
+- `mde-shadowai-detection.kql`: Report extension usage across browsers via Defender
+- `Intune Configuration Profile – Windows 1011 Device Restriction Policy.json`: Block AI browser extensions
+- `shadow-ai-sit-dlp-policy.json`: DLP rule to detect prompt/data leakage
 
 ### 📁 `/docs`  
 Audit and readiness documents:
