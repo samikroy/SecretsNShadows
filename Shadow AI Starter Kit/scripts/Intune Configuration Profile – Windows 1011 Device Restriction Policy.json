@@ -1,0 +1,35 @@
+{
+  "@odata.type": "#microsoft.graph.windows10CustomConfiguration",
+  "displayName": "Block Shadow AI Extensions - Edge & Chrome",
+  "description": "Prevents installation of known Shadow AI browser extensions in Microsoft Edge and Google Chrome using Extension IDs.",
+  "omaSettings": [
+    {
+      "@odata.type": "#microsoft.graph.omaSettingString",
+      "displayName": "Block AI Extensions in Chrome",
+      "description": "Blacklist known Shadow AI Chrome extensions",
+      "omaUri": "./Device/Vendor/MSFT/Policy/Config/Chrome~Policy~googlechrome/ExtensionInstallBlocklist",
+      "value": [
+        "mljpablpcllddapohbgeilffjfgmpkno",  // Merlin
+        "gdiimmpmdoofmahingpgabiikimjgcia",  // Compose AI
+        "hdhinadidafjejdhmfkjgnolgimiaplp",  // Jasper AI
+        "pmgknkfdnemmcbbhhdabmpheecbnkhed",  // ChatGPT for Chrome
+        "dpdmhfocilnekecfjgimjdeckachfbec",  // Copy.ai
+        "jbdlcmjblcnnmhlpbggfcjejjgjfhfai"   // You.com
+      ]
+    },
+    {
+      "@odata.type": "#microsoft.graph.omaSettingString",
+      "displayName": "Block AI Extensions in Edge",
+      "description": "Blacklist known Shadow AI Edge extensions",
+      "omaUri": "./Device/Vendor/MSFT/Policy/Config/MicrosoftEdge~Policy~MicrosoftEdge/ExtensionInstallBlocklist",
+      "value": [
+        "mljpablpcllddapohbgeilffjfgmpkno",
+        "gdiimmpmdoofmahingpgabiikimjgcia",
+        "hdhinadidafjejdhmfkjgnolgimiaplp",
+        "pmgknkfdnemmcbbhhdabmpheecbnkhed",
+        "dpdmhfocilnekecfjgimjdeckachfbec",
+        "jbdlcmjblcnnmhlpbggfcjejjgjfhfai"
+      ]
+    }
+  ]
+}

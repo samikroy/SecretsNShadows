@@ -1,0 +1,5 @@
+(?i)(api[-_]?key|secret|token)['"]?\s*[:=]\s*['"]?[A-Za-z0-9_\-]{20,}
+(?i)(password|pwd)['"]?\s*[:=]\s*['"]?.{6,}
+(?i)(client|customer|user)[-_ ]?(data|info|record)
+(?:\d[ -]*?){13,16}
+(?i)(please analyze|summarize|generate|convert|write|explain)

@@ -1,0 +1,9 @@
+// Combine process and network anomalies related to AI tool use
+let ai_domains = dynamic(["chat.openai.com", "bard.google.com", "notion.so", "claude.ai"]);
+DeviceNetworkEvents
+| where RemoteUrl has_any (ai_domains)
+| join kind=inner (
+    DeviceProcessEvents
+    | where ProcessCommandLine has_any (ai_domains)
+) on DeviceId, Timestamp
+| summarize count() by DeviceName, InitiatingProcessAccountName, RemoteUrl, bin(Timestamp, 1h)

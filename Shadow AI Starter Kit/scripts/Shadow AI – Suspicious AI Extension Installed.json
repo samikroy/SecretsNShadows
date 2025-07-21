@@ -1,0 +1,48 @@
+{
+  "displayName": "Shadow AI – Suspicious AI Extension Installed",
+  "enabled": true,
+  "description": "Detects installation of risky browser extensions (e.g., ChatGPT Assistants, Merlin AI, Compose AI, Jasper AI) on corporate-managed endpoints. These can be used for prompt injection, data scraping, or Shadow AI activity.",
+  "severity": "Medium",
+  "query": "DeviceProcessEvents\n| where FileName in~ ('chrome.exe', 'msedge.exe')\n| where ProcessCommandLine has_any ('Merlin', 'Compose AI', 'Jasper AI', 'ChatGPT for Chrome')\n| extend AI_Extension = extract(@'Merlin|Compose AI|Jasper AI|ChatGPT for Chrome', 0, ProcessCommandLine)\n| project Timestamp, DeviceName, InitiatingProcessAccountName, FileName, AI_Extension, ProcessCommandLine",
+  "queryFrequency": "1h",
+  "queryPeriod": "1h",
+  "triggerOperator": "GreaterThan",
+  "triggerThreshold": 0,
+  "suppressionEnabled": false,
+  "suppressionDuration": "PT1H",
+  "tactics": [
+    "Execution",
+    "Collection",
+    "CommandAndControl"
+  ],
+  "alertRuleTemplateName": "ShadowAI-Extension-Detection",
+  "customDetails": {
+    "ExtensionName": "AI_Extension",
+    "User": "InitiatingProcessAccountName",
+    "Device": "DeviceName"
+  },
+  "eventGroupingSettings": {
+    "aggregationKind": "AlertPerResult"
+  },
+  "entityMappings": [
+    {
+      "entityType": "Host",
+      "fieldMappings": [
+        {
+          "identifier": "FullName",
+          "columnName": "DeviceName"
+        }
+      ]
+    },
+    {
+      "entityType": "Account",
+      "fieldMappings": [
+        {
+          "identifier": "Name",
+          "columnName": "InitiatingProcessAccountName"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

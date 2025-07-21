@@ -1,0 +1,58 @@
+{
+  "id": "shadow-ai-dlp-policy",
+  "name": "Shadow AI Prompt Leakage Detection",
+  "description": "Detects potential sensitive data leakage through generative AI prompt usage (ChatGPT, Copilot, Bard, etc.)",
+  "status": "enabled",
+  "policyMode": "audit",
+  "policyType": "custom",
+  "scopes": [
+    "Exchange",
+    "SharePoint",
+    "OneDrive",
+    "Teams",
+    "Endpoint"
+  ],
+  "rules": [
+    {
+      "id": "shadow-ai-rule-001",
+      "name": "Shadow AI Prompt Leakage Rule",
+      "priority": 1,
+      "conditions": {
+        "contentContainsSensitiveInfo": [
+          {
+            "id": "shadowai-promptleakagedetector",
+            "name": "ShadowAI-PromptLeakageDetector",
+            "minCount": 1
+          }
+        ],
+        "contentSharedWith": "external",
+        "contentDestination": [
+          "chat.openai.com",
+          "bard.google.com",
+          "claude.ai",
+          "copilot.microsoft.com"
+        ]
+      },
+      "actions": [
+        {
+          "type": "blockAccess",
+          "message": "Blocked due to suspected prompt-based AI data leakage"
+        },
+        {
+          "type": "notifyUser",
+          "message": "This message or file contains potential confidential information and may violate AI data sharing policy"
+        },
+        {
+          "type": "generateAlert",
+          "recipients": [
+            "securityadmin@yourdomain.com"
+          ],
+          "severity": "medium"
+        },
+        {
+          "type": "incidentReport"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "displayName": "Shadow AI Prompt Upload Detection",
+  "description": "Detects confidential data posted to AI services like ChatGPT and Bard.",
+  "rules": [
+    {
+      "name": "AI_Prompt_Leakage",
+      "conditions": {
+        "fileExtensions": ["html", "txt"],
+        "contentContains": [
+          "project confidential",
+          "source code",
+          "customer data",
+          "(?i)(chatgpt|bard|claude|openai|poe|gemini)"
+        ]
+      },
+      "actions": {
+        "notifyUser": true,
+        "blockWithOverride": false,
+        "incidentReport": true
+      },
+      "severity": "high"
+    }
+  ]
+}
